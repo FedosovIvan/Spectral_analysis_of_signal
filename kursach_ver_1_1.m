@@ -2,41 +2,41 @@
 clear all;clc;
 load('Signal.mat');
 
-%% Input signal data
+%% Ввод данных сигнала
 Signal=mod1;
-FftL=length(Signal);       % length of fft
+FftL=length(Signal);       % Количество линий Фурье спектра. Равно количеству отчетов сигнала
 
-%% Operation FFT
-FftS=fft(Signal,FftL);     % getting spectr signal by FFT
-FftS=FftS.*conj(FftS)/FftL;% FftS - spectral density of signal
+%% Спектральное представление сигнала
+FftS=fft(Signal,FftL);     % Получени спектра по ДПФ (или БПФ, по возможности)
+FftS=FftS.*conj(FftS)/FftL;% FftS - спектральная плотность мощности
 FftS=FftS(1:(FftL/2));
-%% Plot signal and spectr
+%% Построение графиков сигнала и спектра
 figure (1)
 subplot(2,1,1);           
 plot(Signal);      
 grid on;
-title('Signal');          
+title('Сигнал');          
 
 subplot(2,1,2);             
 plot(FftS);                  
 grid on;
-title('Spectr');             
-xlabel('Freequency'); 
-ylabel('Spectral density');
+title('Спектр сигнала');             
+xlabel('Частота'); 
+ylabel('СПМ');
 
-%% Nor,alization of spectrum by max value
+%% Нормировка по масимальному значению
 FftS=FftS./max(FftS);      
-%% Plot signal and normalization spectr
+%% Построение графика сигнала и нормированного спектра
 figure (2)
 subplot(2,1,1);           
 plot(Signal);      
 grid on;
-title('Signal');          
+title('Сигнал');          
 
 subplot(2,1,2);              
 plot(FftS);                
 grid on;
-title('Normed spectr');                
-xlabel('Freequency'); 
-ylabel('Spectral density');
+title('Нормированный по максимуму спектр сигнала');                
+xlabel('Частота');                
+ylabel('СПМ');       
 
